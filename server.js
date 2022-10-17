@@ -4,7 +4,11 @@ const PORT = process.env.PORT || 3004
 
 const app = express()
 
-app.listen(PORT, () => {
+app.listen(PORT, (err) => {
+     if (err) {
+        return console.log(err);
+     }
+    
     console.log(`SERVER STARTING ${PORT}`);
 })
 
