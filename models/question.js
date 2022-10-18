@@ -27,8 +27,8 @@ const addQuestionSchema = Joi.object({
   rightAnswer: Joi.string().required(),
 });
 
-const TechQuestion = model("techQuestion", questionSchema);
-const TheoryQuestion = model("theoryQuestion", questionSchema);
+const TechQuestion = model("techquestion", questionSchema);
+const TheoryQuestion = model("theoryquestion", questionSchema);
 const schemas = { addQuestionSchema };
 
 module.exports = { TechQuestion, TheoryQuestion, schemas };
