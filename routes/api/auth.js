@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { signup, signin } = require("../../controllers/auth");
+const {
+  signup,
+  signin,
+  logout,
+  getCurrent,
+} = require("../../controllers/auth");
 const { createTryCatchWrapper } = require("../../helpers");
-const { validateBody } = require("../../middleware");
+const { validateBody, authenticate } = require("../../middleware");
 const { schemas } = require("../../models/user");
 
 //signup
@@ -19,5 +24,11 @@ router.post(
   validateBody(schemas.signinSchema),
   createTryCatchWrapper(signin)
 );
+
+//logout
+router.get("/logout", authenticate, createTryCatchWrapper(logout));
+
+//getCurrent
+router.get("/current", authenticate, createTryCatchWrapper(getCurrent));
 
 module.exports = router;
