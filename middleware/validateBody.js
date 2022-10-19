@@ -1,10 +1,9 @@
 const { createReqError } = require("../helpers");
 
-function validateBody(template, message) {
+function validateBody(template) {
   function func(req, _, next) {
     const { error } = template.validate(req.body);
     if (error) {
-      error.message = message;
       next(createReqError(400, error.message));
     }
     next();

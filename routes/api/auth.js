@@ -14,14 +14,14 @@ const { schemas } = require("../../models/user");
 //signup
 router.post(
   "/signup",
-  validateBody(schemas.signupSchema, "Not valid"),
+  validateBody(schemas.signupSchema),
   createTryCatchWrapper(signup)
 );
 
 //signin
 router.post(
   "/signin",
-  validateBody(schemas.signinSchema, "Not valid"),
+  validateBody(schemas.signinSchema),
   createTryCatchWrapper(signin)
 );
 
