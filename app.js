@@ -10,7 +10,7 @@ const theoryQuestionsRouter = require("./routes/api/theoryQuestions");
 app.use(cors());
 app.use(express.json());
 
-app.use("api/users", authRouter);
+app.use("/api/users", authRouter);
 
 app.use("/api/questions/tech", techQuestionsRouter);
 app.use("/api/questions/theory", theoryQuestionsRouter);
