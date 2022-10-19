@@ -2,7 +2,9 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
 const { handleMongooseSchemaError } = require("../helpers");
+
 const emailRegexp = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+// const passwordRegexp = /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{6,}$/;
 
 const userSchema = new Schema(
   {
@@ -15,6 +17,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       minlength: 6,
+      // match: passwordRegexp,
       required: [true, "Password is required"],
     },
     token: {
@@ -28,8 +31,20 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseSchemaError);
 
 const signupSchema = Joi.object({
-  email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
+  email: Joi.string().pattern(emailRegexp).min(5).required().messages({
+    "string.base": `{{#label}}should be a type of 'text'`,
+    "string.empty": `{{#label}} cannot be an empty field`,
+    "string.min": `{{#label}} min lenght 5`,
+    "string.pattern.base": `{{#label}} with value {:[.]} fails to match the required pattern: 'email@mail.com'`,
+    "string.pattern.name": `{{#label}} with value {:[.]} fails to match the 'email@mail.com' pattern`,
+    "any.required": `"email" is a required field`,
+  }),
+  password: Joi.string().min(6).required().messages({
+    "string.empty": `{{#label}} cannot be an empty field`,
+    "string.min": `{{#label}} min lenght 6`,
+    "string.pattern.base": `{{#label}} with value {:[.]} fails to match the required pattern: Minimum six characters, at least one letter, one number and one special character'`,
+    "any.required": `{{#label}} is a required field`,
+  }),
 });
 
 const signinSchema = Joi.object({
