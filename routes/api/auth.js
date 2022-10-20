@@ -52,11 +52,6 @@ router.post(
 router.get("/results", authenticate, createTryCatchWrapper(getResults));
 
 //social link
-
-// router.get(
-//   "/google",
-//   authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
-// );
 router.get(
   "/google/callback",
   authenticateSocial.authenticate("google", {
