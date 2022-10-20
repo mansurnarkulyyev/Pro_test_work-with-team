@@ -11,6 +11,7 @@ const {
   getResults,
 
   googleAuth,
+  gitHubAuth,
 } = require("../../controllers/auth");
 const { createTryCatchWrapper } = require("../../helpers");
 const {
@@ -52,6 +53,7 @@ router.post(
 router.get("/results", authenticate, createTryCatchWrapper(getResults));
 
 //social link
+//google
 router.get(
   "/google/callback",
   authenticateSocial.authenticate("google", {
@@ -61,4 +63,14 @@ router.get(
   createTryCatchWrapper(googleAuth)
 );
 
+//github
+/* router.get(
+  "/github/callback",
+  authenticateSocial.authenticate("github", {
+    scope: ["email", "profile"],
+    session: false,
+  }),
+  createTryCatchWrapper(gitHubAuth)
+);
+*/
 module.exports = router;
