@@ -11,7 +11,6 @@ const {
   getResults,
 
   googleAuth,
-
 } = require("../../controllers/auth");
 const { createTryCatchWrapper } = require("../../helpers");
 const {
@@ -41,7 +40,6 @@ router.get("/logout", authenticate, createTryCatchWrapper(logout));
 //getCurrent
 router.get("/current", authenticate, createTryCatchWrapper(getCurrent));
 
-
 //postResults
 router.post(
   "/results",
@@ -64,6 +62,5 @@ router.get(
   authenticateSocial.authenticate("google", { session: false }),
   createTryCatchWrapper(googleAuth)
 );
-
 
 module.exports = router;
