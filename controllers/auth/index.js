@@ -15,4 +15,5 @@ module.exports = {
   googleAuth,
   postResults,
   getResults,
+  googleAuth,
 };
