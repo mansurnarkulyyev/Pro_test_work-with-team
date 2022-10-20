@@ -10,7 +10,7 @@ const getTechQuestionById = async (req, res) => {
   const { questionId } = req.params;
   const question = await services.getTechById(questionId);
   if (!question) {
-    createReqError(404, "No such question found");
+    throw createReqError(404, "No such question found");
   }
   res.json({ question });
 };
