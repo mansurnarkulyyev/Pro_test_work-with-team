@@ -1,8 +1,6 @@
 const { Strategy } = require("passport-google-oauth2");
 const { User } = require("../../models/user");
 
-//process.env - ${GOOGLE_CLIENT_ID}, ${GOOGLE_CLIENT_SECRET}, ${GOOGLE_CALLBACK_URL}
-
 const googleParams = {
   clientID: `${process.env.GOOGLE_CLIENT_ID}`,
   clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
