@@ -6,6 +6,8 @@ const {
   signin,
   logout,
   getCurrent,
+  postResults,
+  getResults,
 } = require("../../controllers/auth");
 const { createTryCatchWrapper } = require("../../helpers");
 const { validateBody, authenticate } = require("../../middleware");
@@ -30,5 +32,16 @@ router.get("/logout", authenticate, createTryCatchWrapper(logout));
 
 //getCurrent
 router.get("/current", authenticate, createTryCatchWrapper(getCurrent));
+
+//postResults
+router.post(
+  "/results",
+  authenticate,
+  validateBody(schemas.testResultsSchema),
+  createTryCatchWrapper(postResults)
+);
+
+//getResults
+router.get("/results", authenticate, createTryCatchWrapper(getResults));
 
 module.exports = router;
