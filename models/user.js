@@ -1,76 +1,65 @@
 const { Schema, model } = require("mongoose");
-
 const Joi = require("joi");
 
 const { handleMongooseSchemaError } = require("../helpers");
 
-const userSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, "Set name for contact"],
+const emailRegexp = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+// const passwordRegexp = /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{6,}$/;
+
+const userSchema = new Schema(
+  {
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      match: emailRegexp,
+      unique: true,
     },
     password: {
-        type: String,
-        required: [true, 'Password is required'],
-    },
-    email: {
-        type: String,
-        required: [true, 'Email is required'],
-        unique: true,
-    },
-    subscription: {
-        type: String,
-        enum: ["starter", "pro", "business"],
-        default: "starter"
+      type: String,
+      minlength: 6,
+      // match: passwordRegexp,
+      required: [true, "Password is required"],
     },
     token: {
-        type: String,
-        default: null,
+      type: String,
+      default: "",
     },
-    avatarUrl: {
-        type: String,
-        required:true,
-    },
-    verify: {
-    type: Boolean,
-    default: false,
   },
-  verificationToken: {// отправка письмо на эмейл
-    type: String,
-    required: [true, 'Verify token is required'],
-  },
-},{versionKey:false, timestamps:true});
+  { versionKey: false, timestamps: true }
+);
 
 userSchema.post("save", handleMongooseSchemaError);
 
-const registerSchema = Joi.object({  //пишем проверку как проптайпс в реакте
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  password: Joi.string().required(),
-  subscription: Joi.string().required(),
+const signupSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).min(5).required().messages({
+    "string.base": `{{#label}}should be a type of 'text'`,
+    "string.empty": `{{#label}} cannot be an empty field`,
+    "string.min": `{{#label}} min lenght 5`,
+    "string.pattern.base": `{{#label}} with value {:[.]} fails to match the required pattern: 'email@mail.com'`,
+    "string.pattern.name": `{{#label}} with value {:[.]} fails to match the 'email@mail.com' pattern`,
+    "any.required": `"email" is a required field`,
+  }),
+  password: Joi.string().min(6).required().messages({
+    "string.empty": `{{#label}} cannot be an empty field`,
+    "string.min": `{{#label}} min lenght 6`,
+    "string.pattern.base": `{{#label}} with value {:[.]} fails to match the required pattern: Minimum six characters, at least one letter, one number and one special character'`,
+    "any.required": `{{#label}} is a required field`,
+  }),
 });
 
-const loginSchema = Joi.object({  
-  email: Joi.string().required(),
-  password: Joi.string().required(),
-});
-
-const verifyEmailSchema = Joi.object({
-    email:Joi.string().required(),
+const signinSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+  password: Joi.string().min(6).required(),
 });
 
 const schemas = {
-    registerSchema,
-    loginSchema,
-    verifyEmailSchema,
+  signupSchema,
+  signinSchema,
 };
 
 const User = model("user", userSchema);
 
 module.exports = {
-    User,
-    schemas,
+  User,
+  schemas,
 };
-
-
-
