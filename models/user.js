@@ -27,8 +27,11 @@ const userSchema = new Schema(
       default: "",
     },
     testResults: {
-      type: Array,
-      default: [],
+      type: Object,
+      default: {
+        tech: [],
+        theory: [],
+      },
     },
   },
   { versionKey: false, timestamps: true }
@@ -58,12 +61,10 @@ const signinSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
-const testResultsSchema = Joi.array().items(
-  Joi.object({
-    test: Joi.string().valueOf(testTypes),
-    results: Joi.array().items(Joi.number()),
-  })
-);
+const testResultsSchema = Joi.object({
+  name: Joi.string().valueOf(testTypes),
+  results: Joi.array().items(Joi.number()),
+});
 
 const schemas = {
   signupSchema,
