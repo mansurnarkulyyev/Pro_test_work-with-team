@@ -4,6 +4,7 @@ async function postResults(req, res) {
   const { name, results } = req.body;
   const { _id } = req.user;
   const { testResults } = await User.findById(_id);
+  testResults[name] = results;
   await User.findByIdAndUpdate(_id, { testResults });
 
   res.json({
