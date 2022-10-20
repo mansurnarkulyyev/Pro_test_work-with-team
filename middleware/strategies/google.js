@@ -9,6 +9,8 @@ const googleParams = {
   callbackURL: `${process.env.APP_URL}${process.env.GOOGLE_CALLBACK_URL}`,
 
   passReqToCallback: true,
+  proxy: true,
+  passport: true,
 };
 const googleCallback = async (
   req,
