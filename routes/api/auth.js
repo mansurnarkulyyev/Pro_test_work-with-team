@@ -54,10 +54,17 @@ router.get("/results", authenticate, createTryCatchWrapper(getResults));
 
 //social link
 //google
+
+router.get(
+  "/google",
+  authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
+);
+
 router.get(
   "/google/callback",
   authenticateSocial.authenticate("google", {
-    scope: ["email", "profile"],
+    failureRedirect: "/login",
+    successRedirect: "/home",
     session: false,
   }),
   createTryCatchWrapper(googleAuth)
