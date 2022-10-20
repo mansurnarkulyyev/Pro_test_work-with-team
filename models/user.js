@@ -6,6 +6,8 @@ const { handleMongooseSchemaError } = require("../helpers");
 const emailRegexp = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
 // const passwordRegexp = /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{6,}$/;
 
+const testTypes = ["tech", "theory"];
+
 const userSchema = new Schema(
   {
     email: {
@@ -23,6 +25,10 @@ const userSchema = new Schema(
     token: {
       type: String,
       default: "",
+    },
+    testResults: {
+      type: Array,
+      default: [],
     },
   },
   { versionKey: false, timestamps: true }
@@ -52,9 +58,17 @@ const signinSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
+const testResultsSchema = Joi.array().items(
+  Joi.object({
+    test: Joi.string().valueOf(testTypes),
+    results: Joi.array().items(Joi.number()),
+  })
+);
+
 const schemas = {
   signupSchema,
   signinSchema,
+  testResultsSchema,
 };
 
 const User = model("user", userSchema);
