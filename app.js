@@ -11,7 +11,7 @@ const theoryQuestionsRouter = require("./routes/api/theoryQuestions");
 app.use(cors());
 app.use(express.json());
 
-app.use("/pages/users", authPages);
+// app.use("/pages/users", authPages);
 app.use("/api/users", authRouter);
 
 app.use("/api/questions/tech", techQuestionsRouter);
