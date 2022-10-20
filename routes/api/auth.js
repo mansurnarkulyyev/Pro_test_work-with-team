@@ -6,11 +6,19 @@ const {
   signin,
   logout,
   getCurrent,
+
   postResults,
   getResults,
+
+  googleAuth,
+
 } = require("../../controllers/auth");
 const { createTryCatchWrapper } = require("../../helpers");
-const { validateBody, authenticate } = require("../../middleware");
+const {
+  validateBody,
+  authenticate,
+  authenticateSocial,
+} = require("../../middleware");
 const { schemas } = require("../../models/user");
 
 //signup
@@ -33,6 +41,7 @@ router.get("/logout", authenticate, createTryCatchWrapper(logout));
 //getCurrent
 router.get("/current", authenticate, createTryCatchWrapper(getCurrent));
 
+
 //postResults
 router.post(
   "/results",
@@ -43,5 +52,18 @@ router.post(
 
 //getResults
 router.get("/results", authenticate, createTryCatchWrapper(getResults));
+
+//social link
+
+router.get(
+  "/google",
+  authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
+);
+router.get(
+  "/google/callback",
+  authenticateSocial.authenticate("google", { session: false }),
+  createTryCatchWrapper(googleAuth)
+);
+
 
 module.exports = router;

@@ -5,6 +5,8 @@ const getCurrent = require("./getCurrent");
 const postResults = require("./postResults");
 const getResults = require("./getResults");
 
+const googleAuth = require("./googleAuth");
+
 module.exports = {
   signup,
   signin,
@@ -12,4 +14,9 @@ module.exports = {
   getCurrent,
   postResults,
   getResults,
+  googleAuth,
 };
+
+
+
+
