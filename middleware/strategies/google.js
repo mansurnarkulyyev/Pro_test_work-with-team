@@ -24,7 +24,7 @@ const googleCallback = async (
       return done(null, user);
     }
     const newUser = await User.create({ email });
-    done(null, user);
+    done(null, newUser);
   } catch (error) {
     done(error, false);
   }
