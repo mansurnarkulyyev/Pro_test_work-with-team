@@ -6,7 +6,6 @@ const postResults = require("./postResults");
 const getResults = require("./getResults");
 
 const googleAuth = require("./googleAuth");
-const gitHubAuth = require("./gitHubAuth");
 
 module.exports = {
   signup,
@@ -16,5 +15,4 @@ module.exports = {
   postResults,
   getResults,
   googleAuth,
-  gitHubAuth,
 };

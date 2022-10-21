@@ -7,8 +7,6 @@ const googleParams = {
   callbackURL: `${process.env.APP_URL}${process.env.GOOGLE_CALLBACK_URL}`,
 
   passReqToCallback: true,
-  proxy: true,
-  passport: true,
 };
 const googleCallback = async (
   req,
@@ -24,17 +22,12 @@ const googleCallback = async (
       return done(null, user);
     }
     const newUser = await User.create({ email });
-    done(null, user);
+    done(null, newUser);
   } catch (error) {
     done(error, false);
   }
 };
 
 const googleStrategy = new Strategy(googleParams, googleCallback);
-
-/* const googleStrategy = new Strategy({}, () => {});
-{} - object setting
-()=>{} - callback
-*/
 
 module.exports = googleStrategy;
