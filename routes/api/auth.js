@@ -6,10 +6,8 @@ const {
   signin,
   logout,
   getCurrent,
-
   postResults,
   getResults,
-
   googleAuth,
   gitHubAuth,
 } = require("../../controllers/auth");
@@ -50,7 +48,7 @@ router.post(
 );
 
 //getResults
-router.get("/results", authenticate, createTryCatchWrapper(getResults));
+router.get("/results/:kind", authenticate, createTryCatchWrapper(getResults));
 
 //social link
 //google
