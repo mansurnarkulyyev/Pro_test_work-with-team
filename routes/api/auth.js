@@ -6,10 +6,8 @@ const {
   signin,
   logout,
   getCurrent,
-
   postResults,
   getResults,
-
   googleAuth,
 } = require("../../controllers/auth");
 const { createTryCatchWrapper } = require("../../helpers");
@@ -49,10 +47,16 @@ router.post(
 );
 
 //getResults
-router.get("/results", authenticate, createTryCatchWrapper(getResults));
+router.get("/results/:kind", authenticate, createTryCatchWrapper(getResults));
 
 //social link
 //google
+
+router.get(
+  "/google",
+  authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
+);
+
 router.get(
   "/google",
   authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
@@ -61,6 +65,15 @@ router.get(
 router.get(
   "/google/callback",
   authenticateSocial.authenticate("google", {
+
+    failureRedirect: "/login",
+    successRedirect: "/home",
+
+    scope: ["email", "profile"],
+    failureRedirect: "/signup",
+    successRedirect: "/",
+
+
     session: false,
   }),
   createTryCatchWrapper(googleAuth)
