@@ -47,7 +47,7 @@ router.post(
 );
 
 //getResults
-router.get("/results", authenticate, createTryCatchWrapper(getResults));
+router.get("/results/:kind", authenticate, createTryCatchWrapper(getResults));
 
 //social link
 

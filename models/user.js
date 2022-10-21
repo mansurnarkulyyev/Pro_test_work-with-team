@@ -62,7 +62,7 @@ const signinSchema = Joi.object({
 });
 
 const testResultsSchema = Joi.object({
-  name: Joi.string().valueOf(testTypes),
+  kind: Joi.string().valueOf(testTypes),
   results: Joi.array().items(Joi.number()),
 });
 
