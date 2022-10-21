@@ -58,6 +58,8 @@ router.get(
   "/google/callback",
   authenticateSocial.authenticate("google", {
     scope: ["email", "profile"],
+    failureRedirect: "/signup",
+    successRedirect: "/",
     session: false,
   }),
   createTryCatchWrapper(googleAuth)
