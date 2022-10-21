@@ -65,15 +65,6 @@ router.get(
 router.get(
   "/google/callback",
   authenticateSocial.authenticate("google", {
-
-    failureRedirect: "/login",
-    successRedirect: "/home",
-
-    scope: ["email", "profile"],
-    failureRedirect: "/signup",
-    successRedirect: "/",
-
-
     session: false,
   }),
   createTryCatchWrapper(googleAuth)
