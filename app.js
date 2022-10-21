@@ -4,14 +4,13 @@ require("dotenv").config();
 
 const app = express();
 const authRouter = require("./routes/api/auth");
-const authPages = require("./routes/pages/auth");
+
 const techQuestionsRouter = require("./routes/api/techQuestions");
 const theoryQuestionsRouter = require("./routes/api/theoryQuestions");
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/pages/users", authPages);
 app.use("/api/users", authRouter);
 
 app.use("/api/questions/tech", techQuestionsRouter);

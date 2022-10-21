@@ -20,7 +20,6 @@ const userSchema = new Schema(
       type: String,
       minlength: 6,
       // match: passwordRegexp,
-      required: [true, "Password is required"],
     },
     token: {
       type: String,

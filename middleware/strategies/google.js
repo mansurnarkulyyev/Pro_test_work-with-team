@@ -1,14 +1,14 @@
 const { Strategy } = require("passport-google-oauth2");
 const { User } = require("../../models/user");
 
-//process.env - ${GOOGLE_CLIENT_ID}, ${GOOGLE_CLIENT_SECRET}, ${GOOGLE_CALLBACK_URL}
-
 const googleParams = {
-  clientID: `${process.env.GOOGLE_CLIEND_ID}`,
+  clientID: `${process.env.GOOGLE_CLIENT_ID}`,
   clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
   callbackURL: `${process.env.APP_URL}${process.env.GOOGLE_CALLBACK_URL}`,
 
   passReqToCallback: true,
+  proxy: true,
+  passport: true,
 };
 const googleCallback = async (
   req,
