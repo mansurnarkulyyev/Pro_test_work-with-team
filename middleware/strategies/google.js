@@ -7,6 +7,8 @@ const googleParams = {
   callbackURL: `${process.env.APP_URL}${process.env.GOOGLE_CALLBACK_URL}`,
 
   passReqToCallback: true,
+  proxy: true,
+  passport: true,
 };
 const googleCallback = async (
   req,
@@ -22,7 +24,7 @@ const googleCallback = async (
       return done(null, user);
     }
     const newUser = await User.create({ email });
-    done(null, user);
+    done(null, newUser);
   } catch (error) {
     done(error, false);
   }
