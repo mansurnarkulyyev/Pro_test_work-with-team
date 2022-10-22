@@ -12,11 +12,8 @@ module.exports = {
   signin,
   logout,
   getCurrent,
+  googleAuth,
   postResults,
   getResults,
   googleAuth,
 };
-
-
-
-
