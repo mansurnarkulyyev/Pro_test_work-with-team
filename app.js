@@ -13,6 +13,8 @@ const userAvatar = require("./routes/api/userAvatar");
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static("public"));
+
 
 app.use("/pages/users", authPages);
 app.use("/api/users", authRouter);
@@ -20,7 +22,6 @@ app.use("/api/users", authRouter);
 app.use("/api/questions/tech", techQuestionsRouter);
 app.use("/api/questions/theory", theoryQuestionsRouter);
 
-app.use("/api/public", express.static("./public/avatars"));
 
 
 app.use((_, res) => {
