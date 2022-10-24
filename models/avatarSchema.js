@@ -14,11 +14,11 @@ const avatarSchema = new Schema({
     },
      title: {
         type: String,
-        required:true,
+        default:"",
     },
       text: {
         type: String,
-        required:true,
+        default:"",
     },
 });
 
