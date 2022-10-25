@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { createTryCatchWrapper } = require("../../helpers");
 const { materialsTemplate } = require("../../models/materials");
-const { validateBody } = require("../../middleware");
+const { validateBody, isValidId } = require("../../middleware");
 
 const { add, remove, getList } = require("../../controllers/materials");
 
@@ -12,7 +12,7 @@ router.post(
   validateBody(materialsTemplate),
   createTryCatchWrapper(add)
 );
-router.delete("/:id", createTryCatchWrapper(remove));
+router.delete("/:id", isValidId, createTryCatchWrapper(remove));
 router.get("/", createTryCatchWrapper(getList));
 
 module.exports = router;
