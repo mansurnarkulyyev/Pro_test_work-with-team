@@ -4,13 +4,9 @@ const { handleMongooseSchemaError } = require("../helpers");
 
 
 const avatarSchema = new Schema({
-    // image: {
-    //     type: String,
-    //     require:true,
-    // },
     name: {
         type: String,
-        required:[true, "Set name for user"],
+        required:true,
     },
      position: {
          type: String,
@@ -22,12 +18,16 @@ const avatarSchema = new Schema({
           require:true,
         // default:"",
     },
-});
+       cover: {
+        type: String,
+        require:true,
+    },
+   
+}, { versionKey: false, timestamps: true });
 
 avatarSchema.post("save", handleMongooseSchemaError);
 
 const addAvatarSchema = Joi.object({
-//   image: Joi.string().required(),
   name: Joi.string().required(),
   position: Joi.string().required(),
   about: Joi.string().required(),

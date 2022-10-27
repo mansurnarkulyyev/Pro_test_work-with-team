@@ -17,6 +17,8 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.json(100000000));
 
 app.use("/pages/users", authPages);
 app.use("/api/users", authRouter);
@@ -24,7 +26,14 @@ app.use("/api/users", authRouter);
 app.use("/api/questions/tech", techQuestionsRouter);
 app.use("/api/questions/theory", theoryQuestionsRouter);
 
-app.use("/api/team", userAvatarsRouter)
+app.use("/api/teams", userAvatarsRouter);
+
+// app.use((error, req, res, next) => {
+//   // const message = `это неожиданное поле -> "${error.field}"`
+//   console.log(message);
+//   console.log(error.message);
+//   return res.status(500).send(message);
+// })
 
 app.use((_, res) => {
   res.status(404).json({ message: "Not found" });
