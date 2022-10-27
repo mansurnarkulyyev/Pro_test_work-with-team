@@ -1,12 +1,37 @@
 
+const path = require("path");
+
 const { Team } = require("../../models/team");
+const fs = require("fs/promises"); 
+
+const teams = [];
+
+const avatarDir = path.join(__dirname, "../../", "public", "teams");
 
 const addUserAvatar = async (req, res) => {
-    const result = await Team.create(req.body);
+    try {
+        const { path: tempUpload, originalname } = req.file;
+        const { _id } = req.user;
+        const extension = originalname.split(".").pop();
+        const filename = `${_id}.${extension}`;
+        const resultUpload = path.join(avatarDir, filename);
+    await fs.rename(tempUpload, resultUpload);
+    const avatarURL = path.join("teams", filename);
+    const newAvatar = {
+        name: req.body.name,
+        position: req.body.position,
+        about: req.body.about,
+        cover:avatarURL,
+    };
+    const finalData = await Team.create(newAvatar);
 
-    res.status(201).json(result);
+    res.status(201).json(finalData);
+    } catch (error) {
+        await fs.unlink(req.file.path);
+        res.status(401).json({status:401, error})
+    };
+
  };
-
 
 module.exports = addUserAvatar;
 
@@ -20,51 +45,3 @@ module.exports = addUserAvatar;
 
 
 
-
-
-
-
-
-
-// const path = require("path");
-
-// // const { createTryCatchWrapper, createReqError } = require("../../helpers");
-// const { validateBody,upload } = require("../../middleware");
-// const { Team } = require("../../models/avatarSchema");
-// const fs = require("fs/promises"); 
-
-// const avatarDir = path.join(__dirname, "../../", "public", "avatars");
-
-// const updateAvatar = async (req, res) => {
-    
-// try {
-//     const { path: tempUpload, originalname } = req.file;
-//     const { _id } = req.users;
-//     const extension = originalname.split(".").pop();
-//     const filename = `${_id}.${extension}`;
-//     const resultUpload = path.join(avatarDir, filename);
-//     await fs.rename(tempUpload, resultUpload);
-//     const avatarURL = path.join("avatars", filename);
-//     await Team.findByIdAndUpdate(_id,{avatarURL})
-//     // const { name,title,text } = req.body;
-//     // const newAvatar = new Users({
-//     //         avatarURL,
-//     //         name: name,
-//     //         title: title,
-//     //         text: text,
-//     //         cover,
-//     //     })
-//     // const newAvatar = {
-//     //     id: nanoid,
-//     //     name: req.body.name,
-//     //     position: req.body.position,
-//     //     about: req.body.about,
-//     //     cover,
-//     // };
-//     // avatars.push(newAvatar);
-//     res.status(201).json(avatarURL);
-// } catch (error) {
-//     await fs.unlink(req.file.path);
-//     };
-
-// };

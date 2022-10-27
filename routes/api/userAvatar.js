@@ -1,18 +1,19 @@
 const express = require("express");
-const getAll = require("../../controllers/avatar/getAll");
-const addUserAvatar = require("../../controllers/avatar/addUserAvatar");
-const removeById = require("../../controllers/avatar/removeById");
+
 const router = express.Router();
 const { createTryCatchWrapper } = require("../../helpers");
-const { validateBody, isValidId } = require("../../middleware");
+const { validateBody, isValidId, upload,authenticate } = require("../../middleware");
 const { schemas } = require("../../models/team");
+const { addUserAvatar,getAll ,removeById} = require("../../controllers/avatar");
 
 
 
 router.get("/", createTryCatchWrapper(getAll));
 
 
-router.post("/", validateBody(schemas.addAvatarSchema), createTryCatchWrapper(addUserAvatar) );
+router.post("/",authenticate, upload.single("cover"), createTryCatchWrapper(addUserAvatar));
+
+
 
 router.delete("/:id", isValidId, createTryCatchWrapper(removeById));
 
