@@ -20,7 +20,6 @@ const userSchema = new Schema(
       type: String,
       minlength: 6,
       // match: passwordRegexp,
-      required: [true, "Password is required"],
     },
     token: {
       type: String,
@@ -62,7 +61,7 @@ const signinSchema = Joi.object({
 });
 
 const testResultsSchema = Joi.object({
-  name: Joi.string().valueOf(testTypes),
+  kind: Joi.string().valueOf(testTypes),
   results: Joi.array().items(Joi.number()),
 });
 
