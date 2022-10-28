@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const { createTryCatchWrapper } = require("../../helpers");
-const { materialsTemplate } = require("../../models/materials");
+const { literatureTemplate } = require("../../models/literature");
 const { validateBody, isValidId } = require("../../middleware");
 
-const { add, remove, getList } = require("../../controllers/materials");
+const { add, remove, getList } = require("../../controllers/literature");
 
 router.post(
   "/add",
-  validateBody(materialsTemplate),
+  validateBody(literatureTemplate),
   createTryCatchWrapper(add)
 );
 router.delete("/:id", isValidId, createTryCatchWrapper(remove));
