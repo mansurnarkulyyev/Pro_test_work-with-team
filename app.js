@@ -32,7 +32,8 @@ app.use("/api/questions/tech", techQuestionsRouter);
 app.use("/api/questions/theory", theoryQuestionsRouter);
 
 
-app.use("/api/teams", userAvatarsRouter);
+app.use("/api/users/info", userAvatarsRouter);
+
 
 
 // app.use((error, req, res, next) => {
