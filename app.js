@@ -9,7 +9,8 @@ const authRouter = require("./routes/api/auth");
 const techQuestionsRouter = require("./routes/api/techQuestions");
 const theoryQuestionsRouter = require("./routes/api/theoryQuestions");
 
-const materialsRouter = require("./routes/api/materials");
+const literatureRouter = require("./routes/api/literature");
+const resourcesRouter = require("./routes/api/resources");
 
 const userAvatarsRouter = require("./routes/api/userAvatar");
 
@@ -43,7 +44,8 @@ app.use("/api/teams", userAvatarsRouter);
 
 
 
-app.use("/api/materials", materialsRouter);
+app.use("/api/literature", literatureRouter);
+app.use("/api/resources", resourcesRouter);
 
 
 app.use((_, res) => {
