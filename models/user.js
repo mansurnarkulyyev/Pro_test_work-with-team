@@ -32,6 +32,10 @@ const userSchema = new Schema(
         theory: [],
       },
     },
+    admin: {
+      type: Boolean,
+      default:false,
+    },
   },
   { versionKey: false, timestamps: true }
 );

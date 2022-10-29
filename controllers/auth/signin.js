@@ -9,7 +9,8 @@ const { createReqError } = require("../../helpers");
 async function signin(req, res) {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-
+  
+    
   if (!user) {
     throw requestError(401, "Email is wrong");
   }
@@ -28,9 +29,13 @@ async function signin(req, res) {
   const token = jwt.sign(payload, `${process.env.SECRET_KEY}`, {
     expiresIn: "6h",
   });
-  await User.findByIdAndUpdate(user._id, { token });
+
+  const admin = `${process.env.ADMIN_MAIL}` === user.email && `${process.env.ADMIN_ID}` ? true : false;
+
+  await User.findByIdAndUpdate(user._id, { token, admin });
   res.status(201).json({
     token,
+    admin,
     email: user.email,
     id: user._id,
   });

@@ -1,8 +1,8 @@
-const {Team} = require("../../models/team")
+const {Contact} = require("../../models/contact")
 
 
 const getAll=async(_,res) =>{
-    const result = await Team.find();
+    const result = await Contact.find();
     res.json(result);
 }
 

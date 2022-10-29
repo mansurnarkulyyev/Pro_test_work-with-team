@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { createTryCatchWrapper } = require("../../helpers");
 const { validateBody, isValidId, upload,authenticate } = require("../../middleware");
-const { schemas } = require("../../models/team");
+const { schemas } = require("../../models/contact");
 const { addUserAvatar,getAll ,removeById} = require("../../controllers/avatar");
 
 
@@ -11,7 +11,7 @@ const { addUserAvatar,getAll ,removeById} = require("../../controllers/avatar");
 router.get("/", createTryCatchWrapper(getAll));
 
 
-router.post("/",authenticate, upload.single("cover"), createTryCatchWrapper(addUserAvatar));
+router.post("/add",authenticate, upload.single("cover"), createTryCatchWrapper(addUserAvatar));
 
 
 
@@ -19,6 +19,9 @@ router.delete("/:id", isValidId, createTryCatchWrapper(removeById));
 
  
 module.exports = router;
+
+
+
 
 
 

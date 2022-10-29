@@ -31,8 +31,8 @@ app.use("/api/users", authRouter);
 app.use("/api/questions/tech", techQuestionsRouter);
 app.use("/api/questions/theory", theoryQuestionsRouter);
 
+app.use("/api/contacts", userAvatarsRouter);
 
-app.use("/api/users/info", userAvatarsRouter);
 
 
 

@@ -33,12 +33,12 @@ const addAvatarSchema = Joi.object({
   about: Joi.string().required(),
 });
 
-const Team = model("team", avatarSchema);//team название коллекции и должно совпадать с названием файла в моделе 
+const Contact = model("contact", avatarSchema);//contact название коллекции и должно совпадать с названием файла в моделе 
 
 const schemas = { addAvatarSchema };
 
 module.exports = {
-    Team,
+    Contact,
     schemas,
 };
 
