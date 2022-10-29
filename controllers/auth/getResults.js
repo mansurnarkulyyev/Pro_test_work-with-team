@@ -1,10 +1,14 @@
 const { User } = require("../../models/user");
 
 async function getResults(req, res) {
+  const { kind } = req.params;
   const { _id } = req.user;
-  const { testResults } = await User.findById(_id);
+  const result = await User.findById(_id, "testResults");
+  const { testResults } = result;
+  console.log(testResults);
   res.json({
-    testResults,
+    kind,
+    results: testResults[kind],
   });
 }
 module.exports = getResults;
