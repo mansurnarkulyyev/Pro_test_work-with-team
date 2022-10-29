@@ -1,20 +1,33 @@
+const fs = require("fs/promises");
 const path = require("path");
 
 const { Contact } = require("../../models/contact");
-const fs = require("fs/promises");
-const { createReqError } = require("../../helpers");
 
-const teams = [];
+const { createReqError } = require("../../helpers");
 
 const avatarDir = path.join(__dirname, "../../", "public", "contacts");
 
-const addContactAvatar = async (req, res) => {
-  try {
-    if (!req.user.admin) {
-      throw createReqError(403, "Not admin");
-    }
+async function addContactAvatar(req, res) {
+  if (!req.user.admin) {
+    throw createReqError(403, "Not admin");
+  }
+  const { path: tempUpload, originalname } = req.file;
+  const { _id } = req.user;
+  const [extension] = originalname.split(".").reverse();
+  const fileName = `${_id}.${extension}`;
+  const result = path.join(avatarDir, fileName);
+  const cover = path.join("contacts", fileName);
 
-    const { path: tempUpload, originalname } = req.file;
+  await fs.rename(tempUpload, result);
+  const response = await Contact.create({ ...req.body, cover });
+
+  res.status(201).json(response);
+}
+
+module.exports = addContactAvatar;
+
+/*
+const { path: tempUpload, originalname } = req.file;
     const { _id } = req.user;
     const extension = originalname.split(".").pop();
     const filename = `${_id}.${extension}`;
@@ -35,6 +48,5 @@ const addContactAvatar = async (req, res) => {
     await fs.unlink(req.file.path);
     res.status(401).json({ status: 401, error });
   }
-};
 
-module.exports = addContactAvatar;
+*/

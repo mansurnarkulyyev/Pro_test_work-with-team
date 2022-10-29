@@ -34,7 +34,7 @@ const addContactSchema = Joi.object({
   about: Joi.string().required(),
 });
 
-const Contact = model("contact", contactSchema); //contact название коллекции и должно совпадать с названием файла в моделе
+const Contact = model("contact", contactSchema);
 
 const schemas = { addContactSchema };
 
