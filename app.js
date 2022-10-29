@@ -26,7 +26,7 @@ app.use("/api/users", authRouter);
 app.use("/api/questions/tech", techQuestionsRouter);
 app.use("/api/questions/theory", theoryQuestionsRouter);
 
-app.use("/api/users/info", userAvatarsRouter);
+app.use("/api/contacts", userAvatarsRouter);
 
 // app.use((error, req, res, next) => {
 //   // const message = `это неожиданное поле -> "${error.field}"`
