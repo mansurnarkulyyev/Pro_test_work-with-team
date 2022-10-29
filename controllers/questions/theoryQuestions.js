@@ -6,6 +6,11 @@ const getAllTheoryQuestions = async (_, res) => {
   res.json({ questions });
 };
 
+const get12TheoryQuestions = async (_, res) => {
+  const questions = await services.getNRandomTheory(12);
+  res.json({ questions });
+};
+
 const getTheoryQuestionById = async (req, res) => {
   const { questionId } = req.params;
   const question = await services.getTheoryById(questionId);
@@ -15,4 +20,8 @@ const getTheoryQuestionById = async (req, res) => {
   res.json({ question });
 };
 
-module.exports = { getAllTheoryQuestions, getTheoryQuestionById };
+module.exports = {
+  getAllTheoryQuestions,
+  get12TheoryQuestions,
+  getTheoryQuestionById,
+};

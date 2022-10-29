@@ -5,7 +5,6 @@ async function getResults(req, res) {
   const { _id } = req.user;
   const result = await User.findById(_id, "testResults");
   const { testResults } = result;
-  console.log(testResults);
   res.json({
     kind,
     results: testResults[kind],

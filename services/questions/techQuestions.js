@@ -4,8 +4,12 @@ const getAllTech = async () => {
   return TechQuestion.find();
 };
 
+const getNRandomTech = async (n) => {
+  return TechQuestion.aggregate([{ $sample: { size: n } }]);
+};
+
 const getTechById = async (questionId) => {
   return TechQuestion.findOne({ questionId });
 };
 
-module.exports = { getAllTech, getTechById };
+module.exports = { getAllTech, getNRandomTech, getTechById };
