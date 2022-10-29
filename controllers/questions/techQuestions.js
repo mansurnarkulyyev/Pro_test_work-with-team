@@ -6,6 +6,11 @@ const getAllTechQuestions = async (_, res) => {
   res.json({ questions });
 };
 
+const get12RandomTechQuestions = async (_, res) => {
+  const questions = await services.getNRandomTech(12);
+  res.json({ questions });
+};
+
 const getTechQuestionById = async (req, res) => {
   const { questionId } = req.params;
   const question = await services.getTechById(questionId);
@@ -15,4 +20,8 @@ const getTechQuestionById = async (req, res) => {
   res.json({ question });
 };
 
-module.exports = { getAllTechQuestions, getTechQuestionById };
+module.exports = {
+  getAllTechQuestions,
+  get12RandomTechQuestions,
+  getTechQuestionById,
+};
