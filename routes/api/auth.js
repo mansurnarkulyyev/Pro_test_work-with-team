@@ -52,10 +52,17 @@ router.get("/results/:kind", authenticate, createTryCatchWrapper(getResults));
 //social link
 //google
 
+
+router.get(
+  "/google",
+  authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
+);
+
 // router.get(
 //   "/google",
 //   authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
 // );
+
 
 router.get(
   "/google/callback",
@@ -65,5 +72,9 @@ router.get(
   }),
   createTryCatchWrapper(googleAuth)
 );
+
+
+
+
 
 module.exports = router;

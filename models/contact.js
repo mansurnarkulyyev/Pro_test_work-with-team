@@ -1,58 +1,44 @@
 const { Schema, model } = require("mongoose");
-const Joi = require("joi"); 
+const Joi = require("joi");
 const { handleMongooseSchemaError } = require("../helpers");
 
-const contactSchema = new Schema(//Схема
-  {
+
+const avatarSchema = new Schema({
     name: {
-      type: String,
-      required: [true, "Set name for contact"],
+        type: String,
+        required:true,
     },
-    email: {
-      type: String,
+     position: {
+         type: String,
+         require:true,
+        // default:"",
     },
-    phone: {
-      type: String,
+      about: {
+          type: String,
+          require:true,
+        // default:"",
     },
-    favorite: {
-      type: Boolean,
-      default: false,
+       cover: {
+        type: String,
+        require:true,
     },
-     owner: {
-       type: Schema.Types.ObjectId,
-       ref: 'user',
-       required:true,
-    }
-  },
-  { versionKey: false, timestamps: true }//время создание и обновление создать ...
-);
-  
-// с помощю схемы создаем модель,(c больщими буквами) первым аргументом нужно указать назв единственном числе а вторым само схему как ниже указан...
-// contacts => contact
-// categories => category
-// mice => mouse
+   
+}, { versionKey: false, timestamps: true });
 
-contactSchema.post("save", handleMongooseSchemaError);
+avatarSchema.post("save", handleMongooseSchemaError);
 
-const addSchema = Joi.object({  //пишем проверку как проптайпс в реакте
+const addAvatarSchema = Joi.object({
   name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
-  favorite: Joi.boolean(),
+  position: Joi.string().required(),
+  about: Joi.string().required(),
 });
 
-const updateFavoriteSchema = Joi.object({
-    favorite: Joi.boolean().required(),
-});
+const Contact = model("contact", avatarSchema);//contact название коллекции и должно совпадать с названием файла в моделе 
 
-const schemas = {
-  addSchema,
-  updateFavoriteSchema,
-};
-
-const Contact = model("contact", contactSchema);
+const schemas = { addAvatarSchema };
 
 module.exports = {
-  Contact,
-  schemas,
+    Contact,
+    schemas,
 };
+
