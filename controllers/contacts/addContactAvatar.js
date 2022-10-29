@@ -12,11 +12,10 @@ async function addContactAvatar(req, res) {
     throw createReqError(403, "Not admin");
   }
   const { path: tempUpload, originalname } = req.file;
-  const { _id } = req.user;
   const [extension] = originalname.split(".").reverse();
-  const fileName = `${_id}.${extension}`;
+  const fileName = `${originalname}.${extension}`;
   const result = path.join(avatarDir, fileName);
-  const cover = path.join("contacts", fileName);
+  const cover = path.join(`${process.env.APP_URL}/api/contacts`, fileName);
 
   await fs.rename(tempUpload, result);
   const response = await Contact.create({ ...req.body, cover });
