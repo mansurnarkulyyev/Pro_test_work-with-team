@@ -8,6 +8,9 @@ const getAllTheoryQuestions = async (_, res) => {
 
 const get12TheoryQuestions = async (_, res) => {
   const questions = await services.getNRandomTheory(12);
+  for (let i = 1; i <= questions.length; i += 1) {
+    questions[i - 1].questionId = `${i}`;
+  }
   res.json({ questions });
 };
 

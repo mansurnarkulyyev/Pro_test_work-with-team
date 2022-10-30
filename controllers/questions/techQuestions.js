@@ -8,6 +8,9 @@ const getAllTechQuestions = async (_, res) => {
 
 const get12RandomTechQuestions = async (_, res) => {
   const questions = await services.getNRandomTech(12);
+  for (let i = 1; i <= questions.length; i += 1) {
+    questions[i - 1].questionId = `${i}`;
+  }
   res.json({ questions });
 };
 
