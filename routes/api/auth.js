@@ -67,22 +67,22 @@ router.get(
   authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
 );
 
-router.get("/login/success", (req, res) => {
-  if (req.user) {
-    res.status(201).json({
-    success: true,
-      message: "failure",
-    user:req.user
-  })
-  }
-})
+// router.get("/login/success", (req, res) => {
+//   if (req.user) {
+//     res.status(201).json({
+//     success: true,
+//       message: "failure",
+//     user:req.user
+//   })
+//   }
+// })
 
-router.get("/login/field", (req, res) => {
-  res.status(401).json({
-    success: false,
-    message:"failure",
-  })
-})
+// router.get("/login/field", (req, res) => {
+//   res.status(401).json({
+//     success: false,
+//     message:"failure",
+//   })
+// })
 
 router.get(
   "/google/callback",
