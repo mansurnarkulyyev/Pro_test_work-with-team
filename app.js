@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const passport = require("passport");
-const cookieSession = require("cookie-session");
+// const cookieSession = require("cookie-session");
 
 const app = express();
 
@@ -25,11 +25,11 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-app.use(cookieSession({
-  name: "session",
-  keys: ["cyberWolves"],
-  maxAge:24 * 24 * 64 * 100
-}))
+// app.use(cookieSession({
+//   name: "session",
+//   keys: ["cyberWolves"],
+//   maxAge:24 * 24 * 64 * 100
+// }))
 
 
 

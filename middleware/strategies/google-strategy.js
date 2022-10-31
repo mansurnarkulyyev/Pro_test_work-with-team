@@ -22,7 +22,7 @@ const googleCallback = async (
     const user = await User.findOne({ email });
     if (user) {
       return done(null, user);
-      req.user = user;
+      // req.user = user;
     }
 
     const newUser = await User.create({ email, name:displayName });
@@ -33,13 +33,6 @@ const googleCallback = async (
   }
 };
 
-// passport.serializeUser((user, done) => {
-//   done(null,user)
-// })
-
-// passport.deserializeUser((user, done) => {
-//   done(null,user)
-// })
 
 const googleStrategy = new Strategy(googleParams, googleCallback);
 
