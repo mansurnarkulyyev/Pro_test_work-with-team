@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const passport = require("passport");
+// const passport = require("passport");
 
-const { APP_URL } = process.env;
 
 const {
   signup,
@@ -67,37 +66,15 @@ router.get(
   authenticateSocial.authenticate("google", { scope: ["email", "profile"] })
 );
 
-// router.get("/login/success", (req, res) => {
-//   if (req.user) {
-//     res.status(201).json({
-//     success: true,
-//       message: "failure",
-//     user:req.user
-//   })
-//   }
-// })
-
-// router.get("/login/field", (req, res) => {
-//   res.status(401).json({
-//     success: false,
-//     message:"failure",
-//   })
-// })
 
 router.get(
   "/google/callback",
-  // passport.authenticate("google", {
   authenticateSocial.authenticate("google", {
     scope: ["email", "profile"],
     session: false,
-    successRedirect: APP_URL,
-    failureRedirect:"/login/filed"
   }),
   createTryCatchWrapper(googleAuth)
 );
-
-
-
 
 
 module.exports = router;
