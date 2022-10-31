@@ -30,13 +30,7 @@ app.use(cookieSession({
   keys: ["cyberWolves"],
   maxAge:24 * 24 * 64 * 100
 }))
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(cors({
-  origin: "http://localhost:3000",
-  method: "GET,POST,PUT,DELETE,",
-  credentials:true,
-}));
+
 
 
 app.use("/api/users", authRouter);
