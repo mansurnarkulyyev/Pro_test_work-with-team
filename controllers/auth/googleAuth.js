@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const { User } = require("../../models/user");
 const { APP_URL } = process.env;
+
 async function googleAuth(req, res) {
   const { _id } = req.user;
 

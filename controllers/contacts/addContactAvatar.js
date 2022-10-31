@@ -25,6 +25,10 @@ async function addContactAvatar(req, res) {
 module.exports = addContactAvatar;
 
 /*
+try{
+  if (!req.user.admin) {
+    throw createReqError(403, "Not admin");
+  }
 const { path: tempUpload, originalname } = req.file;
     const { _id } = req.user;
     const extension = originalname.split(".").pop();
