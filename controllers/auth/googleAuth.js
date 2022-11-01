@@ -20,7 +20,7 @@ async function googleAuth(req, res) {
      _id,
    })
 
-  //res.redirect(APP_URL);
+  res.redirect(APP_URL);
 }
 module.exports = googleAuth;
 
