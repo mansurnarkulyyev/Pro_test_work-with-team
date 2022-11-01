@@ -13,12 +13,12 @@ async function googleAuth(req, res) {
   });
   await User.findByIdAndUpdate(_id, { token });
 
-   res
-   .status(201)
-   .json({
-    token,
-     _id,
-   })
+  // res
+  // .status(201)
+  // .json({
+  //  token,
+  //   _id,
+  // })
 
   res.redirect(APP_URL);
 }
