@@ -17,7 +17,7 @@ async function googleAuth(req, res) {
    .status(201)
    .json({
     token,
-    // _id,
+     _id,
    })
 
   //res.redirect(APP_URL);
