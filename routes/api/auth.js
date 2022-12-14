@@ -76,5 +76,19 @@ router.get(
   createTryCatchWrapper(googleAuth)
 );
 
+// 
+authenticateSocial.serializeUser((user) => {
+  return done(null, user._id);
+});
+
+authenticateSocial.deserializeUser((id) => {
+
+  User.findById(id, (err) => {
+    // Whatever we return goes to the client and binds to the req.user property
+    return done(null, doc);
+  })
+})
+
+
 
 module.exports = router;

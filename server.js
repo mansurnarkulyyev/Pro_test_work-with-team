@@ -4,7 +4,7 @@ const { DB_HOST, PORT=3004 } = process.env;
 
 mongoose
   .connect(DB_HOST)
-  .then(() => app.listen(PORT, () => console.log("ok")))
+  .then(() => app.listen(PORT, () => console.log("Started ok")))
   .catch((err) => {
     console.log(err.message);
     process.exitCode = 1;
