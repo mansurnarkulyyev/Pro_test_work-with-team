@@ -2,8 +2,10 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// import session from 'express-session';
 const passport = require("passport");
-// const cookieSession = require("cookie-session");
+
 
 const app = express();
 
@@ -17,7 +19,7 @@ const resourcesRouter = require("./routes/api/resources");
 
 const contactsRouter = require("./routes/api/contacts");
 
-const passportSetup = require("./middleware/authenticate-social")
+// const passportSetup = require("./middleware/authenticate-social")
 
 
 app.use(cors());
@@ -25,12 +27,21 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-// app.use(cookieSession({
-//   name: "session",
-//   keys: ["cyberWolves"],
-//   maxAge:24 * 24 * 64 * 100
-// }))
 
+
+app.use(passport.initialize());
+// app.use(passport.session());
+// app.use(
+//   session({
+//     secret: "secretcode",
+//     resave: true,
+//     saveUninitialized: true,
+//     cookie: {
+//       sameSite: "none",
+//       secure: true,
+//       maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
+//     }
+//   }))
 
 
 app.use("/api/users", authRouter);
