@@ -24,6 +24,7 @@ async function addContactAvatar(req, res) {
 
 module.exports = addContactAvatar;
 
+
 /*
 try{
   if (!req.user.admin) {
