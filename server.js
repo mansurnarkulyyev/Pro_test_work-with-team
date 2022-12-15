@@ -3,7 +3,7 @@ const app = require("./app");
 const { DB_HOST, PORT=3004 } = process.env;
 
 mongoose
-  .createConnection(DB_HOST)
+  .connect(DB_HOST)
   .then(() => app.listen(PORT, () => console.log("Started ok")))
   .catch((err) => {
     console.log(err.message);
