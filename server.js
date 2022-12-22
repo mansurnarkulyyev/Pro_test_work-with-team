@@ -4,7 +4,7 @@ mongoose.set('strictQuery', true);
 const { DB_HOST, PORT=3004 } = process.env;
 
 mongoose
-  .connect(DB_HOST)
+  .connect('mongodb+srv://Mansur:Rzj8yE9XVfUq40vp@cluster0.cojdy0d.mongodb.net/pro-test?retryWrites=true&w=majority')
   .then(() => app.listen(PORT, () => console.log("Started ok")))
   .catch((err) => {
     console.log(err.message);
